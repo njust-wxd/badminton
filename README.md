@@ -3,10 +3,10 @@
 sudo apt-get install gcc cmake
 
 2. 编译
-mkdir build
-cd build
-cmake ..
-make badminton -j4
+- mkdir build
+- cd build
+- cmake .. -DLWS_WITH_SSL=OFF
+- make badminton -j4
 
 3. 运行及终止
 运行 

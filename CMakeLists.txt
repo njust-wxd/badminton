@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
+project(badminton-demo)
+
 message(STATUS "SOURCE DIR: ${CMAKE_SOURCE_DIR}")
 
 message(STATUS "PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
@@ -9,7 +11,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${CMAKE_CURRENT_SOURCE_DIR}/websocket
     ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libwebsockets-3.0.1/lib
-    ${PROJECT_BINARY_DIR}/tests/test/thirdparty/libwebsockets-3.0.1
+    ${PROJECT_BINARY_DIR}/thirdparty/libwebsockets-3.0.1
     ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/jsoncpp-1.8.4/include
 )
 
@@ -33,4 +35,4 @@ add_compile_options(-g -fPIC -Wno-deprecated-declarations -Wno-write-strings -Wn
 
 add_executable(badminton ${SRCS})
 
-target_link_libraries(badminton websockets jsoncpp)
+target_link_libraries(badminton websockets jsoncpp_lib_static)
