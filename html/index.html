@@ -1,0 +1,191 @@
+<meta charset="UTF-8"> 
+<html>
+<head>
+<style>
+td {
+	text-align:left;
+	vertical-align:top
+}
+
+input {
+  height: 35px;
+}
+
+button {
+	width: wordwrap;
+	height: 35px;
+}
+
+textarea {
+	margin-top: 5px;
+}
+</style>
+</head>
+</body>
+<body>
+  <table cellspacing="10">
+    <tr>
+      <td>
+				<label>参与者1: </label>
+				<input type="text" id="player1"/>
+	  	</td>
+    	<td>
+				<label>参与者2: </label>
+				<input type="text" id="player2"/>
+    	</td>
+			<td>
+				<label>参与者3: </label>
+				<input type="text" id="player3"/>
+    	</td>
+			<td>
+				<label>参与者4: </label>
+				<input type="text" id="player4"/>
+    	</td>
+    </tr>
+		<tr>
+      <td>
+				<label>参与者5: </label>
+				<input type="text" id="player5"/>
+	  	</td>
+    	<td>
+				<label>参与者6: </label>
+				<input type="text" id="player6"/>
+    	</td>
+			<td>
+				<label>参与者7: </label>
+				<input type="text" id="player7"/>
+    	</td>
+			<td>
+				<label>参与者8: </label>
+				<input type="text" id="player8"/>
+    	</td>
+    </tr>
+		<tr>
+			<td colspan="4" style="text-align: center">
+				<button id="btn_group" onclick="group()">分 组</button>
+				<button id="btn_clear" onclick="clear()">清空结果</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: center">	
+				<textarea id="group_result" readonly cols=80 rows=20></textarea>
+			</td>
+		</tr>
+  </table>
+</body>
+	
+<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+<script type="text/javascript">
+function get_appropriate_ws_url(extra_url) {
+	var pcol;
+	var u = document.URL;
+	/*
+	 * We open the websocket encrypted if this page came on an
+	 * https:// url itself, otherwise unencrypted
+	 */
+	if (u.substring(0, 5) == "https") {
+		pcol = "wss://";
+		u = u.substr(8);
+	} else {
+		pcol = "ws://";
+		if (u.substring(0, 4) == "http")
+			u = u.substr(7);
+	}
+
+	u = u.split('/');
+	/* + "/xxx" bit is for IE10 workaround */
+	return pcol + u[0] + "/" + extra_url;
+}
+
+function new_ws(urlpath, protocol) {
+	if (typeof MozWebSocket != "undefined")
+		return new MozWebSocket(urlpath, protocol);
+
+	return new WebSocket(urlpath, protocol);
+}
+
+ws = new_ws(get_appropriate_ws_url(""), "badminton-service");
+try {
+	ws.onopen = function() {
+		document.getElementById("btn_group").disabled = 0;
+		document.getElementById("btn_clear").disabled = 0;
+	} 
+
+	ws.onmessage = function got_packet(msg) {
+		var obj = JSON.parse(msg.data);
+		if (obj.type == "WS_GROUP_RESULT") {
+			displayResult(obj.data);
+		}
+	} 
+
+	ws.onclose = function() {
+		document.getElementById("btn_group").disabled = 1;
+		document.getElementById("btn_clear").disabled = 1;
+	}
+} catch(exception) {
+	alert('<p>Error' + exception);  
+}
+
+function group() {
+	var player1 = document.getElementById("player1").value;
+	var player2 = document.getElementById("player2").value;
+	var player3 = document.getElementById("player3").value;
+	var player4 = document.getElementById("player4").value;
+	var player5 = document.getElementById("player5").value;
+	var player6 = document.getElementById("player6").value;
+	var player7 = document.getElementById("player7").value;
+	var player8 = document.getElementById("player8").value;
+	if (player1 == null || player1 == "") {
+		alert("参与者1 没有输入！");
+	} else if (player2 == null || player2 == "") {
+		alert("参与者2 没有输入！");
+	} else if (player3 == null || player3 == "") {
+		alert("参与者3 没有输入！");
+	} else if (player4 == null || player4 == "") {
+		alert("参与者4 没有输入！");
+	} else if (player5 == null || player5 == "") {
+		alert("参与者5 没有输入！");
+	} else if (player6 == null || player6 == "") {
+		alert("参与者6 没有输入！");
+	} else if (player7 == null || player7 == "") {
+		alert("参与者7 没有输入！");
+	} else if (player8 == null || player8 == "") {
+		alert("参与者8 没有输入！");
+	} else {
+		var sendJson = {
+			"cmd": "CMD_GROUP",
+			"player1": player1,
+			"player2": player2,
+			"player3": player3,
+			"player4": player4,
+			"player5": player5,
+			"player6": player6,
+			"player7": player7,
+			"player8": player8
+		};
+		ws.send(JSON.stringify(sendJson));
+	}
+}
+
+function clear() {
+	document.getElementById("group_result").value = "";
+}
+
+window.onbeforeunload= function() {
+	ws.close();
+	return confirm("确定离开此页面吗？");
+}
+
+window.onunload = function() {
+	ws.close();
+	return confirm("确定离开此页面吗？");
+}
+
+function displayResult(data) {
+	document.getElementById("group_result").value = document.getElementById("group_result").value + data + "\n";
+	document.getElementById("group_result").scrollTop = document.getElementById("group_result").scrollHeight;
+}
+
+</script>
+
+</html>
