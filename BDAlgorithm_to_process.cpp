@@ -7,7 +7,17 @@
 //
 
 #include "BDAlgorithm_to_process.h"
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <map>
+#include <stdio.h>
+#include <cmath>
+#include <cstdlib>
+#include <algorithm>
+using namespace std;
 
+namespace badminton {
 void get_four_players_of_a_match(vector<string> list_of_players,
                                 ONE_MATCH* all_matches)
 {
@@ -205,4 +215,6 @@ void print_match_results(MATCH_RESULTS* match_results)
         <<match_results[i].net_score<<" "
         <<match_results[i].rank<<endl;
     }
+}
+
 }

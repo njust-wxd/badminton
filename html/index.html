@@ -63,7 +63,7 @@ textarea {
 		<tr>
 			<td colspan="4" style="text-align: center">
 				<button id="btn_group" onclick="group()">分 组</button>
-				<button id="btn_clear" onclick="clear()">清空结果</button>
+				<button id="btn_clear" onclick="result_clear()">清空结果</button>
 			</td>
 		</tr>
 		<tr>
@@ -167,7 +167,7 @@ function group() {
 	}
 }
 
-function clear() {
+function result_clear() {
 	document.getElementById("group_result").value = "";
 }
 

@@ -9,8 +9,10 @@
 #ifndef BDAlgorithm_to_process_hpp
 #define BDAlgorithm_to_process_hpp
 #include "BMDefine.h"
-#include <stdio.h>
+#include <vector>
 
+using std::vector;
+namespace badminton {
 //获取所有比赛的人员对阵名单
 //输入(vector<string> list_of_players)：从界面得到的选手的名单。
 //输出(ONE_MATCH* all_matches)：
@@ -41,5 +43,7 @@ void get_match_results(vector<string> list_of_players,
 void print_all_teams_of_match(PLAYERS_OF_ONE_MATCH* players_of_match);
 
 void print_match_results(MATCH_RESULTS* match_results);
+
+} // namespace badminton
 
 #endif /* BDAlgorithm_to_process_hpp */
