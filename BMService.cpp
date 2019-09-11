@@ -62,8 +62,7 @@ void BMService::group(const std::vector<std::string>& players)
     //获得所有的比赛结果，结果解放在match_results中
     get_match_results(players,all_matches,match_results);
     
-    std::string result = "//TODO 写分组算法，结果组织成 string 类型";
-    std::string sndMsg = BMCommon::genGroupResult(result);
+    std::string sndMsg = BMCommon::genMatchResult(match_results, _RECYCLE_8_);
     BMWSService::getInstance()->sendMessage(sndMsg);
 }
 

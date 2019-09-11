@@ -115,6 +115,8 @@ try {
 		var obj = JSON.parse(msg.data);
 		if (obj.type == "WS_GROUP_RESULT") {
 			displayResult(obj.data);
+		} else if (obj.type == "WS_MATCH_RESULT") {
+			displayMatchResult(obj.result);
 		}
 	} 
 
@@ -183,6 +185,11 @@ window.onunload = function() {
 
 function displayResult(data) {
 	document.getElementById("group_result").value = document.getElementById("group_result").value + data + "\n";
+	document.getElementById("group_result").scrollTop = document.getElementById("group_result").scrollHeight;
+}
+
+function displayMatchResult(data) {
+	document.getElementById("group_result").value = document.getElementById("group_result").value + JSON.stringify(data) + "\n";
 	document.getElementById("group_result").scrollTop = document.getElementById("group_result").scrollHeight;
 }
 
