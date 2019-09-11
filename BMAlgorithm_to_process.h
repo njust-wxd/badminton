@@ -1,5 +1,5 @@
 //
-//  BDAlgorithm_to_process.h
+//  BMAlgorithm_to_process.h
 //  Badminton_6_or_8
 //
 //  Created by 张倚萌 on 2019/9/11.

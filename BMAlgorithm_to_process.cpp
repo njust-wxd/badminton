@@ -6,7 +6,7 @@
 //  Copyright © 2019 张倚萌. All rights reserved.
 //
 
-#include "BDAlgorithm_to_process.h"
+#include "BMAlgorithm_to_process.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
