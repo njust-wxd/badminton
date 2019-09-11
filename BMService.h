@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <BDAlgorithm_to_process.h>
+#include "BMDefine.h"
 
 namespace badminton {
 class BMService
