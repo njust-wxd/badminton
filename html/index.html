@@ -72,6 +72,103 @@ textarea {
 			</td>
 		</tr>
   </table>
+
+  <table id="result_tbl" cellspacing="10" style="display: none;">
+		<tr>
+			<td colspan="2" style="text-align: center">比 赛 详 情</td>
+		</tr>
+    <tr>
+			<td style="text-align: center">
+				<label>第 01 场比赛</label><br>
+				<input type="text" readonly id="first_match"/><br>
+				<input type="text" style="text-align: center" id="score_1st_match"/><br>
+				<button id="btn_confirm_score_1st" onclick="confirm_score_1st()">确 定</button>
+				<button id="btn_cancel_score_1st" onclick="cancel_score_1st()">取 消</button>
+			</td>
+			<td>
+				<label>第 02 场比赛</label>
+				<input type="text" readonly id="second_match"/>
+				<input type="text" style="text-align: center" id="score_2nd_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 03 场比赛</label>
+				<input type="text" readonly id="third_match"/>
+				<input type="text" style="text-align: center" id="score_3rd_match"/>
+			</td>
+			<td>
+				<label>第 04 场比赛</label>
+				<input type="text" readonly id="forth_match"/>
+				<input type="text" style="text-align: center" id="score_4th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 05 场比赛</label>
+				<input type="text" readonly id="fifth_match"/>
+				<input type="text" style="text-align: center" id="score_5th_match"/>
+			</td>
+			<td>
+				<label>第 06 场比赛</label>
+				<input type="text" readonly id="sixth_match"/>
+				<input type="text" style="text-align: center" id="score_6th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 07 场比赛</label>
+				<input type="text" readonly id="seventh_match"/>
+				<input type="text" style="text-align: center" id="score_7th_match"/>
+			</td>
+			<td>
+				<label>第 08 场比赛</label>
+				<input type="text" readonly id="eighth_match"/>
+				<input type="text" style="text-align: center" id="score_8th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 09 场比赛</label>
+				<input type="text" readonly id="ninth_match"/>
+				<input type="text" style="text-align: center" id="score_9th_match"/>
+			</td>
+			<td>
+				<label>第 10 场比赛</label>
+				<input type="text" readonly id="tenth_match"/>
+				<input type="text" style="text-align: center" id="score_10th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 11 场比赛</label>
+				<input type="text" readonly id="eleventh_match"/>
+				<input type="text" style="text-align: center" id="score_11th_match"/>
+			</td>
+			<td>
+				<label>第 12 场比赛</label>
+				<input type="text" readonly id="twelfth_match"/>
+				<input type="text" style="text-align: center" id="score_12th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>第 13 场比赛</label>
+				<input type="text" readonly id="thirteenth_match"/>
+				<input type="text" style="text-align: center" id="score_13th_match"/>
+			</td>
+			<td>
+				<label>第 14 场比赛</label>
+				<input type="text" readonly id="fourteenth_match"/>
+				<input type="text" style="text-align: center" id="score_14th_match"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center">
+				<button id="btn_rank" onclick="result_rank()">排 名</button>
+			</td>
+		</tr>
+  </table>
 </body>
 	
 <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
@@ -169,8 +266,13 @@ function group() {
 	}
 }
 
+function result_rank() {
+
+}
+
 function result_clear() {
 	document.getElementById("group_result").value = "";
+	document.getElementById("result_tbl").style.display = "none";
 }
 
 window.onbeforeunload= function() {
@@ -189,6 +291,7 @@ function displayResult(data) {
 }
 
 function displayMatchResult(data) {
+	document.getElementById("result_tbl").style.display = "";
 	document.getElementById("group_result").value = document.getElementById("group_result").value + JSON.stringify(data) + "\n";
 	document.getElementById("group_result").scrollTop = document.getElementById("group_result").scrollHeight;
 }
