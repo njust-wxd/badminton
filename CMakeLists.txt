@@ -9,6 +9,7 @@ message(STATUS "PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/common
+    ${CMAKE_CURRENT_SOURCE_DIR}/match
     ${CMAKE_CURRENT_SOURCE_DIR}/websocket
     ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libwebsockets-3.0.1/lib
     ${PROJECT_BINARY_DIR}/thirdparty/libwebsockets-3.0.1
@@ -17,11 +18,13 @@ include_directories(
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SRCS_ROOT)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/common SRCS_COMMON)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/match SRCS_MATCH)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/websocket SRCS_WEBSOKET)
 
 set(SRCS
     ${SRCS_ROOT}
     ${SRCS_COMMON}
+    ${SRCS_MATCH}
     ${SRCS_WEBSOKET}
 )
 

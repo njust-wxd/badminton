@@ -36,8 +36,8 @@ enum BMLogLevel
     LOG_LEVEL_ERROR
 };
 
-#define _RECYCLE_6_ 4               //4人转
-#define _RECYCLE_6_NUM_OF_MATCH_ 3   //4人转一共打3场
+#define _RECYCLE_4_ 4               //4人转
+#define _RECYCLE_4_NUM_OF_MATCH_ 3   //4人转一共打3场
 
 #define _RECYCLE_5_ 5               //5人转
 #define _RECYCLE_5_NUM_OF_MATCH_ 5   //5人转一共打5场

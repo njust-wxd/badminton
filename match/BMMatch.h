@@ -8,12 +8,29 @@ using std::string;
 using std::vector;
 
 namespace badminton {
-class BMMatch
-{
+class BMPlayer;
+class BMGame;
+class BMMatch {
 public:
-    BMMatch(int type, vector<string> players);
+    BMMatch();
     ~BMMatch();
 
+    void setName(const string& name);
+    void setType(int type);
+    void initPlayers(const vector<string>& names);
+    void setPlayers(const vector<BMPlayer>& players);
+    bool startMatch();
+
+    string getName();
+    int getType();
+    vector<BMPlayer> getPlayers();
+    vector<BMGame> getGames();
+
+private:
+    string m_name;
+    int m_type;
+    vector<BMPlayer> m_players;
+    vector<BMGame> m_games;
 };
 
 } // namespace badminton
