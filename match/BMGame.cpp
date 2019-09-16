@@ -50,9 +50,32 @@ void BMGame::setScore(int scoreA, int scoreB)
     m_score = scoreA - scoreB;
 }
 
+SCORES_OF_ONE_MATCH BMGame::getScore()
+{
+    SCORES_OF_ONE_MATCH score_of_one_match;
+    score_of_one_match.scores_of_first_pair_of_players = m_scoreA;
+    score_of_one_match.scores_of_second_pair_of_players = m_scoreB;
+    return score_of_one_match;
+}
+
+vector<BMPlayer> BMGame::getPlayersA()
+{
+    return m_players_A;
+}
+    
+vector<BMPlayer> BMGame::getPlayersB()
+{
+    return m_players_B;
+}
+    
 int BMGame::getIndex()
 {
     return m_index;
+}
+    
+int BMGame::getNetScore()
+{
+    return m_score;
 }
 
 string BMGame::getGameString()

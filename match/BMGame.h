@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "BMDefine.h"
 
 using std::vector;
 using std::string;
@@ -22,6 +23,10 @@ public:
     void setPlayersB(const vector<BMPlayer>& players);
     void addPlayerB(const BMPlayer& player);
     void setScore(int scoreA, int scoreB);
+    SCORES_OF_ONE_MATCH getScore();
+    vector<BMPlayer> getPlayersA();
+    vector<BMPlayer> getPlayersB();
+    int getNetScore();
 
     int getIndex();
     string getGameString();

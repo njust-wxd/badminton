@@ -23,8 +23,18 @@ public:
     void setFinalScore(int finalScore);
     void setRank(int rank);
     void setJoinGames(const vector<BMGame>& joinGames);
+    
+    void addOneWinTimes();
+    void addOneLoseTimes();
+    void addFinalScore(int net_score);
+    void addOneRank();
+    int getWinTimes();
+    int getLoseTimes();
+    int getFinalScore();
 
     string getName();
+    
+    
 
 private:
     string m_name;

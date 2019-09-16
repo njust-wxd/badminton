@@ -27,6 +27,22 @@ public:
     vector<BMGame> getGames();
 
     string getGamesString();
+    
+    //获取所有8人比赛的人员对阵名单
+    void get_four_players_of_a_match_for_8();
+    
+    //得到一场比赛的分数
+    //输入(int id_of_match)：比赛的ID号；
+    //输入(scores_of_first_pair_of_players):第一对选手的比赛得分；
+    //输入(scores_of_second_pair_of_players):第二对选手的比赛得分；
+    void send_scores_of_a_match(int id_of_match,
+                                int scores_of_first_pair_of_players,
+                                int scores_of_second_pair_of_players);
+    //得到所有的比赛结果
+    //输入(vector<string> list_of_players)：所有选手的名单；
+    //输入(ONE_MATCH all_matches[_RECYCLE_8_NUM_OF_MATCH_])：所有的比赛名单和比赛分数；
+    //输出(MATCH_RESULTS* match_result)：输出所有的比赛结果。
+    void get_match_results();
 
 private:
     void startMatch_Recycle4();

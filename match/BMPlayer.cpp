@@ -6,6 +6,9 @@ namespace badminton {
 
 BMPlayer::BMPlayer()
 {
+    m_winTimes = 0;
+    m_loseTimes = 0;
+    m_finalScore = 0;
 }
 
 BMPlayer::~BMPlayer()
@@ -57,4 +60,32 @@ string BMPlayer::getName()
     return m_name;
 }
 
+void BMPlayer::addOneWinTimes()
+{
+    m_winTimes++;
+}
+void BMPlayer::addOneLoseTimes()
+{
+    m_loseTimes++;
+}
+void BMPlayer::addOneRank()
+{
+    m_rank++;
+}
+void BMPlayer::addFinalScore(int net_score)
+{
+    m_finalScore = m_finalScore + net_score;
+}
+int BMPlayer::getWinTimes()
+{
+    return m_winTimes;
+}
+int BMPlayer::getLoseTimes()
+{
+        return m_loseTimes;
+}
+int BMPlayer::getFinalScore()
+{
+    return m_finalScore;
+}
 } // namespace badminton
