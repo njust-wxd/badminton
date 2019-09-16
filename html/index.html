@@ -20,9 +20,11 @@ textarea {
 	margin-top: 5px;
 }
 </style>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 </head>
 </body>
 <body>
+	<div id="player-input">
   <table cellspacing="10">
     <tr>
       <td>
@@ -66,123 +68,46 @@ textarea {
 				<button id="btn_clear" onclick="result_clear()">重新比赛</button>
 			</td>
 		</tr>
-  </table>
-
-  <table id="result_tbl" cellspacing="10" style="display: ;">
-		<tr>
-			<td colspan="7" style="text-align: center">比 赛 详 情</td>
-		</tr>
-    <tr>
-			<td style="text-align: center">
-				<label>第 01 场比赛</label><br>
-				<input type="text" readonly id="first_match"/><br>
-				<input type="text" style="text-align: center" id="score_1st_match"/><br>
-				<button id="btn_confirm_score_1" onclick="confirm_score_1()">确 定</button>
-				<button id="btn_cancel_score_1" onclick="cancel_score_1()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 02 场比赛</label><br>
-				<input type="text" readonly id="second_match"/><br>
-				<input type="text" style="text-align: center" id="score_2nd_match"/><br>
-				<button id="btn_confirm_score_2" onclick="confirm_score_2()">确 定</button>
-				<button id="btn_cancel_score_2" onclick="cancel_score_2()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 03 场比赛</label><br>
-				<input type="text" readonly id="third_match"/><br>
-				<input type="text" style="text-align: center" id="score_3rd_match"/><br>
-				<button id="btn_confirm_score_3" onclick="confirm_score_3()">确 定</button>
-				<button id="btn_cancel_score_3" onclick="cancel_score_3()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 04 场比赛</label><br>
-				<input type="text" readonly id="forth_match"/><br>
-				<input type="text" style="text-align: center" id="score_4th_match"/><br>
-				<button id="btn_confirm_score_4" onclick="confirm_score_4()">确 定</button>
-				<button id="btn_cancel_score_4" onclick="cancel_score_4()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 05 场比赛</label><br>
-				<input type="text" readonly id="fifth_match"/><br>
-				<input type="text" style="text-align: center" id="score_5th_match"/><br>
-				<button id="btn_confirm_score_5" onclick="confirm_score_5()">确 定</button>
-				<button id="btn_cancel_score_5" onclick="cancel_score_5()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 06 场比赛</label><br>
-				<input type="text" readonly id="sixth_match"/><br>
-				<input type="text" style="text-align: center" id="score_6th_match"/><br>
-				<button id="btn_confirm_score_6" onclick="confirm_score_6()">确 定</button>
-				<button id="btn_cancel_score_6" onclick="cancel_score_6()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 07 场比赛</label><br>
-				<input type="text" readonly id="seventh_match"/><br>
-				<input type="text" style="text-align: center" id="score_7th_match"/><br>
-				<button id="btn_confirm_score_7" onclick="confirm_score_7()">确 定</button>
-				<button id="btn_cancel_score_7" onclick="cancel_score_7()">取 消</button>
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: center">
-				<label>第 08 场比赛</label><br>
-				<input type="text" readonly id="eighth_match"/><br>
-				<input type="text" style="text-align: center" id="score_8th_match"/><br>
-				<button id="btn_confirm_score_8" onclick="confirm_score_8()">确 定</button>
-				<button id="btn_cancel_score_8" onclick="cancel_score_8()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 09 场比赛</label><br>
-				<input type="text" readonly id="ninth_match"/><br>
-				<input type="text" style="text-align: center" id="score_9th_match"/><br>
-				<button id="btn_confirm_score_9" onclick="confirm_score_9()">确 定</button>
-				<button id="btn_cancel_score_9" onclick="cancel_score_9()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 10 场比赛</label><br>
-				<input type="text" readonly id="tenth_match"/><br>
-				<input type="text" style="text-align: center" id="score_10th_match"/><br>
-				<button id="btn_confirm_score_10" onclick="confirm_score_10()">确 定</button>
-				<button id="btn_cancel_score_10" onclick="cancel_score_10()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 11 场比赛</label><br>
-				<input type="text" readonly id="eleventh_match"/><br>
-				<input type="text" style="text-align: center" id="score_11th_match"/><br>
-				<button id="btn_confirm_score_11" onclick="confirm_score_11()">确 定</button>
-				<button id="btn_cancel_score_11" onclick="cancel_score_11()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 12 场比赛</label><br>
-				<input type="text" readonly id="twelfth_match"/><br>
-				<input type="text" style="text-align: center" id="score_12th_match"/><br>
-				<button id="btn_confirm_score_12" onclick="confirm_score_12()">确 定</button>
-				<button id="btn_cancel_score_12" onclick="cancel_score_12()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 13 场比赛</label><br>
-				<input type="text" readonly id="thirteenth_match"/><br>
-				<input type="text" style="text-align: center" id="score_13th_match"/><br>
-				<button id="btn_confirm_score_13" onclick="confirm_score_13()">确 定</button>
-				<button id="btn_cancel_score_13" onclick="cancel_score_13()">取 消</button>
-			</td>
-			<td style="text-align: center">
-				<label>第 14 场比赛</label><br>
-				<input type="text" readonly id="fourteenth_match"/><br>
-				<input type="text" style="text-align: center" id="score_14th_match"/><br>
-				<button id="btn_confirm_score_14" onclick="confirm_score_14()">确 定</button>
-				<button id="btn_cancel_score_14" onclick="cancel_score_14()">取 消</button>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="7" style="text-align: center">
-				<button id="btn_rank" onclick="result_rank()">排 名</button>
-			</td>
-		</tr>
-  </table>
+	</table>
+</div>
 </body>
-	
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+
+<script type="text/javascript">
+function genTable() {
+	var table = 
+	"<table id='result_tbl' cellspacing='10'>"
+	+	"<tr>"
+	+		"<td colspan='7' style='text-align: center'>比 赛 详 情</td>"
+	+	"</tr>"
+  + "<tr>";
+	for (var j = 0; j < 2; j++) {
+		table += "<tr>";
+		for (var i = 1; i <= 7; i++) {
+			var k = j * 7 + i;
+			table += 
+			"<td style='text-align: center'>"
+			+	"<label>第 " + k + " 场比赛</label><br>"
+			+	"<input type='text' readonly id='game_" + k + "'/><br>"
+			+	"<input type='text' style='text-align: center' id='score_" + k + "_match'/><br>"
+			+	"<button id='btn_confirm_score_" + k + "' onclick='confirm_score_" + k + "()'>确 定</button>"
+			+	"<button id='btn_cancel_score_" + k + "' onclick='cancel_score_" + k + "()'>取 消</button>"
+			+ "</td>";
+		}
+		table += "</tr>";
+	}
+	table += 
+	"<tr>"
+	+		"<td colspan='7' style='text-align: center'>"
+	+			"<button id='btn_rank' onclick='result_rank()'>排 名</button>"
+	+		"</td>"
+	+	"</tr>"
+	+ "</table>";
+	$('#player-input').append(table);
+}
+</script>
+
 <script type="text/javascript">
 function get_appropriate_ws_url(extra_url) {
 	var pcol;
@@ -310,21 +235,21 @@ function displayMatchResult(data) {
 }
 
 function displayGames(games) {
-	document.getElementById("result_tbl").style.display = "";
-	document.getElementById("first_match").value = games[0].duizhen;
-	document.getElementById("second_match").value = games[1].duizhen;
-	document.getElementById("third_match").value = games[2].duizhen;
-	document.getElementById("forth_match").value = games[3].duizhen;
-	document.getElementById("fifth_match").value = games[4].duizhen;
-	document.getElementById("sixth_match").value = games[5].duizhen;
-	document.getElementById("seventh_match").value = games[6].duizhen;
-	document.getElementById("eighth_match").value = games[7].duizhen;
-	document.getElementById("ninth_match").value = games[8].duizhen;
-	document.getElementById("tenth_match").value = games[9].duizhen;
-	document.getElementById("eleventh_match").value = games[10].duizhen;
-	document.getElementById("twelfth_match").value = games[11].duizhen;
-	document.getElementById("thirteenth_match").value = games[12].duizhen;
-	document.getElementById("fourteenth_match").value = games[13].duizhen;
+	genTable();
+	document.getElementById("game_1").value = games[0].duizhen;
+	document.getElementById("game_2").value = games[1].duizhen;
+	document.getElementById("game_3").value = games[2].duizhen;
+	document.getElementById("game_4").value = games[3].duizhen;
+	document.getElementById("game_5").value = games[4].duizhen;
+	document.getElementById("game_6").value = games[5].duizhen;
+	document.getElementById("game_7").value = games[6].duizhen;
+	document.getElementById("game_8").value = games[7].duizhen;
+	document.getElementById("game_9").value = games[8].duizhen;
+	document.getElementById("game_10").value = games[9].duizhen;
+	document.getElementById("game_11").value = games[10].duizhen;
+	document.getElementById("game_12").value = games[11].duizhen;
+	document.getElementById("game_13").value = games[12].duizhen;
+	document.getElementById("game_14").value = games[13].duizhen;
 }
 
 </script>
