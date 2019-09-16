@@ -26,6 +26,14 @@ public:
     vector<BMPlayer> getPlayers();
     vector<BMGame> getGames();
 
+    string getGamesString();
+
+private:
+    void startMatch_Recycle4();
+    void startMatch_Recycle5();
+    void startMatch_Recycle8();
+    void startMatch_Recycle9();
+
 private:
     string m_name;
     int m_type;

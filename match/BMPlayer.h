@@ -24,6 +24,8 @@ public:
     void setRank(int rank);
     void setJoinGames(const vector<BMGame>& joinGames);
 
+    string getName();
+
 private:
     string m_name;
     string m_nickName;

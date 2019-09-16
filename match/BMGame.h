@@ -15,12 +15,19 @@ public:
     BMGame();
     ~BMGame();
 
+    void setIndex(int index);
     void setType(int type);
     void setPlayersA(const vector<BMPlayer>& players);
+    void addPlayerA(const BMPlayer& player);
     void setPlayersB(const vector<BMPlayer>& players);
+    void addPlayerB(const BMPlayer& player);
     void setScore(int scoreA, int scoreB);
 
+    int getIndex();
+    string getGameString();
+
 private:
+    int m_index;
     int m_type;  // 单打1、双打2，细分为: 男单11、女单12、男双21、女双22、混双23
     vector<BMPlayer> m_players_A;
     vector<BMPlayer> m_players_B;

@@ -1,9 +1,10 @@
 #include "BMCommon.h"
+#include "BMPlayer.h"
 #include "json/json.h"
 
 namespace badminton {
 
-std::string BMCommon::getTimeString()
+string BMCommon::getTimeString()
 {
     time_t rawtime;
     struct tm *timeinfo;
@@ -12,10 +13,10 @@ std::string BMCommon::getTimeString()
 
     char buffer[80];
     strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", timeinfo);
-    return std::string(buffer);
+    return string(buffer);
 }
 
-std::string BMCommon::genGroupResult(const std::string& result)
+string BMCommon::genGroupResult(const string& result)
 {
     Json::FastWriter writer;
     Json::Value root;
@@ -24,7 +25,7 @@ std::string BMCommon::genGroupResult(const std::string& result)
     return writer.write(root);
 }
 
-std::string BMCommon::genMatchResult(MATCH_RESULTS* pResult, size_t num)
+string BMCommon::genMatchResult(MATCH_RESULTS* pResult, size_t num)
 {
     Json::FastWriter writer;
     Json::Value root;
@@ -43,6 +44,23 @@ std::string BMCommon::genMatchResult(MATCH_RESULTS* pResult, size_t num)
     }
     root["result"] = Json::Value(jmatch_result);
 
+    return writer.write(root);
+}
+
+string BMCommon::genGamesString(const vector<BMGame>& games)
+{
+    Json::FastWriter writer;
+    Json::Value root;
+    Json::Value jgames;
+    root["type"] = Json::Value(WS_MATCH_GAMES);
+    for (BMGame game : games)
+    {
+        Json::Value jgame;
+        jgame["index"] = game.getIndex();
+        jgame["duizhen"] = game.getGameString();
+        jgames.append(jgame);
+    }
+    root["games"] = Json::Value(jgames);
     return writer.write(root);
 }
 

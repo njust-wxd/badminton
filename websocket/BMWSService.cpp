@@ -229,7 +229,7 @@ void BMWSService::handleMessage(char* payload, size_t len)
         players.push_back(player6);
         players.push_back(player7);
         players.push_back(player8);
-        m_pService->group(players);
+        m_pService->startMatch(8, players);
     }
     else
     {
