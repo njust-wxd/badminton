@@ -16,7 +16,7 @@ public:
     int start();
     void stop();
 
-    void group(const std::vector<std::string>& players);
+    void startMatch(int type, const std::vector<std::string>& players);
 
 };
 

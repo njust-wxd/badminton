@@ -2,17 +2,24 @@
 #define _BMSERVICE_BMCOMMON_H
 
 #include "BMDefine.h"
+#include "BMGame.h"
 #include <string>
+#include <vector>
+
+using std::string;
+using std::vector;
 
 namespace badminton {
 class BMCommon
 {
 public:
-    static std::string getTimeString();
+    static string getTimeString();
 
-    static std::string genGroupResult(const std::string& result);
+    static string genGroupResult(const string& result);
 
-    static std::string genMatchResult(MATCH_RESULTS* pResult, size_t num);
+    static string genMatchResult(MATCH_RESULTS* pResult, size_t num);
+
+    static string genGamesString(const vector<BMGame>& games);
 };
 
 } // namespace badminton

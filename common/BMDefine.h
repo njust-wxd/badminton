@@ -8,6 +8,7 @@ using std::string;
 namespace badminton {
 #define WS_GROUP_RESULT "WS_GROUP_RESULT"
 #define WS_MATCH_RESULT "WS_MATCH_RESULT"
+#define WS_MATCH_GAMES  "WS_MATCH_GAMES"
 
 //the following are UBUNTU/LINUX ONLY terminal color codes.
 #define RESET   "\033[0m"
