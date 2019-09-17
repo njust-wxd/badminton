@@ -238,14 +238,14 @@ void BMMatch::get_match_results()
                     {
                         
                         m_players[j].addOneWinTimes();
-                        int net_score = m_games[i].getNetScore();
+                        int net_score = m_games[i].getNetScoreA();
                         m_players[j].addFinalScore(net_score);
                     }
                     if (m_players_B[0].getName() == m_players[j].getName()
                         or m_players_B[1].getName() == m_players[j].getName())
                     {
                         m_players[j].addOneLoseTimes();
-                        int net_score = 0 - m_games[i].getNetScore();
+                        int net_score = 0 - m_games[i].getNetScoreA();
                         m_players[j].addFinalScore(net_score);
                     }
                     
@@ -256,14 +256,14 @@ void BMMatch::get_match_results()
                         or m_players_B[1].getName() == m_players[j].getName())
                     {
                         m_players[j].addOneWinTimes();
-                        int net_score = 0 - m_games[i].getNetScore();
+                        int net_score = 0 - m_games[i].getNetScoreA();
                         m_players[j].addFinalScore(net_score);
                     }
                     if (m_players_A[0].getName() == m_players[j].getName()
                         or m_players_A[1].getName() == m_players[j].getName())
                     {
                         m_players[j].addOneLoseTimes();
-                        int net_score = m_games[i].getNetScore();
+                        int net_score = m_games[i].getNetScoreA();
                         m_players[j].addFinalScore(net_score);
                     }
                 }

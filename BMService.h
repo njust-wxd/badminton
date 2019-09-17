@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "BMDefine.h"
+#include "BMGame.h"
 
 namespace badminton {
 class BMService
@@ -16,6 +17,8 @@ public:
     void stop();
 
     void startMatch(int type, const std::vector<std::string>& players);
+
+    void handleMatchResult(const std::vector<BMGame>& games);
 
 };
 

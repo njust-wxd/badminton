@@ -1,15 +1,22 @@
 #include "BMWSService.h"
 #include "BMWSCallback.h"
 #include "BMLogWrap.h"
+#include "BMDefine.h"
 #include "json/json.h"
 #include "BMService.h"
+#include "BMGame.h"
+#include "BMPlayer.h"
 
 #include <cstring>
 #include <vector>
 #include <string>
 
+using std::vector;
+using std::string;
+
 namespace badminton {
-const static std::string CMD_GROUP = "CMD_GROUP";
+const static std::string CMD_START_MATCH = "CMD_START_MATCH";
+const static std::string CMD_MATCH_RESULT = "CMD_MATCH_RESULT";
 
 BMWSService* BMWSService::s_pInstance = nullptr;
 static struct lws_http_mount simple_mount = {
@@ -201,35 +208,38 @@ void BMWSService::handleMessage(char* payload, size_t len)
     }
 
     std::string cmd = root["cmd"].asString();
-    if (CMD_GROUP == cmd)
+    if (CMD_START_MATCH == cmd)
     {
-        BMSLOG_I("CMD_GROUP");
-        std::string player1 = root["player1"].asString();
-        std::string player2 = root["player2"].asString();
-        std::string player3 = root["player3"].asString();
-        std::string player4 = root["player4"].asString();
-        std::string player5 = root["player5"].asString();
-        std::string player6 = root["player6"].asString();
-        std::string player7 = root["player7"].asString();
-        std::string player8 = root["player8"].asString();
-        BMSLOG_I("CMD_GROUP, player1: %s", player1.data());
-        BMSLOG_I("CMD_GROUP, player2: %s", player2.data());
-        BMSLOG_I("CMD_GROUP, player3: %s", player3.data());
-        BMSLOG_I("CMD_GROUP, player4: %s", player4.data());
-        BMSLOG_I("CMD_GROUP, player5: %s", player5.data());
-        BMSLOG_I("CMD_GROUP, player6: %s", player6.data());
-        BMSLOG_I("CMD_GROUP, player7: %s", player7.data());
-        BMSLOG_I("CMD_GROUP, player8: %s", player8.data());
+        BMSLOG_I("CMD_START_MATCH");
         std::vector<std::string> players;
-        players.push_back(player1);
-        players.push_back(player2);
-        players.push_back(player3);
-        players.push_back(player4);
-        players.push_back(player5);
-        players.push_back(player6);
-        players.push_back(player7);
-        players.push_back(player8);
+        for (auto jplayer : root["players"])
+        {
+            players.push_back(jplayer.asString());
+        }
         m_pService->startMatch(8, players);
+    }
+    else if (CMD_MATCH_RESULT == cmd)
+    {
+        BMSLOG_I("CMD_MATCH_RESULT");
+        vector<BMGame> games;
+        for (auto jresult : root["result"])
+        {
+            BMGame game;
+            BMPlayer player_a1, player_a2, player_b1, player_b2;
+            player_a1.setName(jresult["player_a1"].asString());
+            player_a2.setName(jresult["player_a2"].asString());
+            player_b1.setName(jresult["player_b1"].asString());
+            player_b2.setName(jresult["player_b2"].asString());
+            game.addPlayerA(player_a1);
+            game.addPlayerA(player_a2);
+            game.addPlayerB(player_b1);
+            game.addPlayerB(player_b2);
+            int score_a = jresult["score_a"].asInt();
+            int score_b = jresult["score_b"].asInt();
+            game.setScore(score_a, score_b);
+            games.push_back(game);
+        }
+        m_pService->handleMatchResult(games);
     }
     else
     {

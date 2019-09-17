@@ -47,7 +47,8 @@ void BMGame::setScore(int scoreA, int scoreB)
 {
     m_scoreA = scoreA;
     m_scoreB = scoreB;
-    m_score = scoreA - scoreB;
+    m_net_scoreA = scoreA - scoreB;
+    m_net_scoreB = scoreB - scoreA;
 }
 
 SCORES_OF_ONE_MATCH BMGame::getScore()
@@ -62,10 +63,24 @@ vector<BMPlayer> BMGame::getPlayersA()
 {
     return m_players_A;
 }
+
+string BMGame::getPlayersAString()
+{
+    string strA = m_players_A.size() == 2 ? 
+        m_players_A[0].getName() + "/" + m_players_A[1].getName() : m_players_A[0].getName();
+    return strA;
+}
     
 vector<BMPlayer> BMGame::getPlayersB()
 {
     return m_players_B;
+}
+
+string BMGame::getPlayersBString()
+{
+    string strB = m_players_B.size() == 2 ? 
+        m_players_B[0].getName() + "/" + m_players_B[1].getName() : m_players_B[0].getName();
+    return strB;
 }
     
 int BMGame::getIndex()
@@ -73,9 +88,14 @@ int BMGame::getIndex()
     return m_index;
 }
     
-int BMGame::getNetScore()
+int BMGame::getNetScoreA()
 {
-    return m_score;
+    return m_net_scoreA;
+}
+
+int BMGame::getNetScoreB()
+{
+    return m_net_scoreB;
 }
 
 string BMGame::getGameString()
@@ -86,7 +106,7 @@ string BMGame::getGameString()
     string strB = m_players_B.size() == 2 ? 
         m_players_B[0].getName() + "/" + m_players_B[1].getName() : m_players_B[0].getName();
     
-    return strA + " : " + strB;
+    return strA + " VS " + strB;
 }
 
 } // namespace badminton

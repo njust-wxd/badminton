@@ -25,8 +25,11 @@ public:
     void setScore(int scoreA, int scoreB);
     SCORES_OF_ONE_MATCH getScore();
     vector<BMPlayer> getPlayersA();
+    string getPlayersAString();
     vector<BMPlayer> getPlayersB();
-    int getNetScore();
+    string getPlayersBString();
+    int getNetScoreA();
+    int getNetScoreB();
 
     int getIndex();
     string getGameString();
@@ -38,7 +41,8 @@ private:
     vector<BMPlayer> m_players_B;
     int m_scoreA; // A的得分
     int m_scoreB; // B的得分
-    int m_score;  // A:B的净胜分
+    int m_net_scoreA;  // A:B的净胜分
+    int m_net_scoreB;  // B:A的净胜分
 };
 
 } // namespace badminton

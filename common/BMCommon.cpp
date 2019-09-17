@@ -57,7 +57,8 @@ string BMCommon::genGamesString(const vector<BMGame>& games)
     {
         Json::Value jgame;
         jgame["index"] = game.getIndex();
-        jgame["duizhen"] = game.getGameString();
+        jgame["players_a"] = game.getPlayersAString();
+        jgame["players_b"] = game.getPlayersBString();
         jgames.append(jgame);
     }
     root["games"] = Json::Value(jgames);
