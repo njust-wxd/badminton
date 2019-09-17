@@ -102,7 +102,6 @@ void BMService::handleMatchResult(BMMatch& match)
         }
     }
     
-    
     for (i = 0; i < _RECYCLE_8_; i++)
     {
         int wintimes_i = players[i].getWinTimes();
@@ -117,9 +116,8 @@ void BMService::handleMatchResult(BMMatch& match)
         players[i].addOneRank();
     }
     
-    
-    
-    
+    string result = BMCommon::genRankResult(players);
+    BMWSService::getInstance()->sendMessage(result);
 }
 
 }

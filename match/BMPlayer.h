@@ -31,10 +31,8 @@ public:
     int getWinTimes();
     int getLoseTimes();
     int getFinalScore();
-
     string getName();
-    
-    
+    int getRank();
 
 private:
     string m_name;

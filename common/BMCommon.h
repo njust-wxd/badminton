@@ -3,6 +3,7 @@
 
 #include "BMDefine.h"
 #include "BMGame.h"
+#include "BMPlayer.h"
 #include <string>
 #include <vector>
 
@@ -17,9 +18,9 @@ public:
 
     static string genGroupResult(const string& result);
 
-    static string genMatchResult(MATCH_RESULTS* pResult, size_t num);
-
     static string genGamesString(const vector<BMGame>& games);
+
+    static string genRankResult(const vector<BMPlayer>& players);
 };
 
 } // namespace badminton

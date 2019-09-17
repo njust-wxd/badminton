@@ -25,28 +25,6 @@ string BMCommon::genGroupResult(const string& result)
     return writer.write(root);
 }
 
-string BMCommon::genMatchResult(MATCH_RESULTS* pResult, size_t num)
-{
-    Json::FastWriter writer;
-    Json::Value root;
-    Json::Value jmatch_result;
-    root["type"] = Json::Value(WS_MATCH_RESULT);
-    for (size_t i = 0; i < num; ++i)
-    {
-        Json::Value jplayer;
-        jplayer["name"] = pResult[i].name_of_person;
-        jplayer["win_times"] = pResult[i].win_or_lose[0];
-        jplayer["lose_times"] = pResult[i].win_or_lose[1];
-        jplayer["net_score"] = pResult[i].net_score;
-        jplayer["rank"] = pResult[i].rank;
-        jplayer["big_or_small"] = pResult[i].score_of_big_or_small;
-        jmatch_result.append(jplayer);
-    }
-    root["result"] = Json::Value(jmatch_result);
-
-    return writer.write(root);
-}
-
 string BMCommon::genGamesString(const vector<BMGame>& games)
 {
     Json::FastWriter writer;
@@ -62,6 +40,27 @@ string BMCommon::genGamesString(const vector<BMGame>& games)
         jgames.append(jgame);
     }
     root["games"] = Json::Value(jgames);
+    return writer.write(root);
+}
+
+string BMCommon::genRankResult(const vector<BMPlayer>& players)
+{
+    Json::FastWriter writer;
+    Json::Value root;
+    Json::Value jmatch_result;
+    root["type"] = Json::Value(WS_RANK_RESULT);
+    for (BMPlayer player : players)
+    {
+        Json::Value jplayer;
+        jplayer["name"] = player.getName();
+        jplayer["win_times"] = player.getWinTimes();
+        jplayer["lose_times"] = player.getLoseTimes();
+        jplayer["net_score"] = player.getFinalScore();
+        jplayer["rank"] = player.getRank();
+        jmatch_result.append(jplayer);
+    }
+    root["players_result"] = Json::Value(jmatch_result);
+
     return writer.write(root);
 }
 
