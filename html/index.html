@@ -47,6 +47,7 @@ button {
 
 .score-btn {
 	height: 25px;
+	display: none;
 }
 </style>
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
@@ -221,6 +222,14 @@ function start_match() {
 
 function result_rank() {
   var root = {};
+	root["cmd"] = "CMD_MATCH_RESULT";
+	var jplayers = [];
+	for (var i = 1; i <=8; i++) {
+		var player_id = "player" + i;
+		var player = $("#"+player_id).val();
+		jplayers.push(player);
+	}
+	root["players"] = jplayers;
 	var games_result = [];
 	for (var i = 1; i <=14; i++) {
 		var game_result = {};
@@ -233,22 +242,21 @@ function result_rank() {
 		var score_a = $("#"+score_a_id).val();
 		game_result["player_a1"] = players_a[0];
 		game_result["player_a2"] = players_a[1];
-		game_result["score_a"] = score_a;
+		game_result["score_a"] = Number(score_a);
 
 		var players_b = $("#"+players_b_id).text().split('/');
 		var score_b = $("#"+score_b_id).val();
 		game_result["player_b1"] = players_b[0];
 		game_result["player_b2"] = players_b[1];
-		game_result["score_b"] = score_b;
+		game_result["score_b"] = Number(score_b);
 		
 		var net_score_a = Number(score_a) - Number(score_b);
 		var net_score_b = Number(score_b) - Number(score_a);
-		game_result["net_score_a"] = net_score_a;
-		game_result["net_score_b"] = net_score_b;
+		game_result["net_score_a"] = Number(net_score_a);
+		game_result["net_score_b"] = Number(net_score_b);
 
 		games_result.push(game_result);
 	}
-	root["cmd"] = "CMD_MATCH_RESULT";
 	root["result"] = games_result;
 	ws.send(JSON.stringify(root));
 }

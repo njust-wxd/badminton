@@ -42,6 +42,11 @@ void BMMatch::setPlayers(const vector<BMPlayer> &players)
     m_players = players;
 }
 
+void BMMatch::setGames(const vector<BMGame>& games)
+{
+    m_games = games;
+}
+
 bool BMMatch::startMatch()
 {
     BMSLOG_D("invoked");

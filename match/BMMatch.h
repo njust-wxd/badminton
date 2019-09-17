@@ -19,6 +19,7 @@ public:
     void setType(int type);
     void initPlayers(const vector<string>& names);
     void setPlayers(const vector<BMPlayer>& players);
+    void setGames(const vector<BMGame>& games);
     bool startMatch();
 
     string getName();
