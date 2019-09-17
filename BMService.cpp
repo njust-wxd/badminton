@@ -42,7 +42,7 @@ void BMService::startMatch(int type, const std::vector<std::string>& players)
     BMWSService::getInstance()->sendMessage(gamesString);
 }
 
-void BMService::handleMatchResult(const vector<BMGame>& games)
+void BMService::handleMatchResult(const BMMatch& match)
 {
     BMSLOG_I("invoked");
 }

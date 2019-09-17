@@ -4,6 +4,7 @@
 #include "BMDefine.h"
 #include "json/json.h"
 #include "BMService.h"
+#include "BMMatch.h"
 #include "BMGame.h"
 #include "BMPlayer.h"
 
@@ -221,6 +222,9 @@ void BMWSService::handleMessage(char* payload, size_t len)
     else if (CMD_MATCH_RESULT == cmd)
     {
         BMSLOG_I("CMD_MATCH_RESULT");
+        BMMatch match;
+        match.setName("八人转");
+        match.setType(8);
         vector<BMGame> games;
         for (auto jresult : root["result"])
         {
@@ -239,7 +243,8 @@ void BMWSService::handleMessage(char* payload, size_t len)
             game.setScore(score_a, score_b);
             games.push_back(game);
         }
-        m_pService->handleMatchResult(games);
+        match.setGames(games);
+        m_pService->handleMatchResult(match);
     }
     else
     {
