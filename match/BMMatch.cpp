@@ -67,6 +67,7 @@ bool BMMatch::startMatch()
     default:
         break;
     }
+    return true;
 }
 
 string BMMatch::getName()
@@ -233,7 +234,7 @@ void BMMatch::get_match_results()
             for (j = 0; j < _RECYCLE_8_; j++)
             {
                 vector<BMPlayer> m_players_A = m_games[i].getPlayersA();
-                vector<BMPlayer> m_players_B = m_games[i].getPlayersA();
+                vector<BMPlayer> m_players_B = m_games[i].getPlayersB();
 
                 if (scores.scores_of_first_pair_of_players > scores.scores_of_second_pair_of_players)
                 {

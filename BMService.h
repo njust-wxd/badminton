@@ -18,7 +18,7 @@ public:
 
     void startMatch(int type, const std::vector<std::string>& players);
 
-    void handleMatchResult(const BMMatch& match);
+    void handleMatchResult(BMMatch& match);
 
 };
 

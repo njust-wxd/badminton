@@ -225,6 +225,15 @@ void BMWSService::handleMessage(char* payload, size_t len)
         BMMatch match;
         match.setName("八人转");
         match.setType(8);
+
+        vector<BMPlayer> players;
+        for (auto jplayer : root["players"])
+        {
+            BMPlayer player;
+            player.setName(jplayer.asString());
+            players.push_back(player);
+        }
+        match.setPlayers(players);
         vector<BMGame> games;
         for (auto jresult : root["result"])
         {
