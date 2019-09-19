@@ -17,6 +17,7 @@ public:
 
     void setName(const string& name);
     void setNickName(const string& nickName);
+    void setBigorSmall(const string& bigorsmall);
     void setSex(int sex);
     void setWinTimes(int winTimes);
     void setLoseTimes(int loseTimes);
@@ -31,6 +32,7 @@ public:
     int getWinTimes();
     int getLoseTimes();
     int getFinalScore();
+    string getBigorSmall();
     string getName();
     int getRank();
 
@@ -42,6 +44,7 @@ private:
     int m_loseTimes;
     int m_finalScore;
     int m_rank;
+    string m_BigorSmall;
     vector<BMGame> m_joinGames;
 };
 

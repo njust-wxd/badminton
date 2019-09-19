@@ -31,6 +31,10 @@ void BMPlayer::setSex(int sex)
     m_sex = sex;
 }
 
+void BMPlayer::setBigorSmall(const string& bigorsmall)
+{
+    m_BigorSmall = bigorsmall;
+}
 void BMPlayer::setWinTimes(int winTimes)
 {
     m_winTimes = winTimes;
@@ -56,6 +60,10 @@ void BMPlayer::setJoinGames(const vector<BMGame>& joinGames)
     m_joinGames = joinGames;
 }
 
+string BMPlayer::getBigorSmall()
+{
+    return m_BigorSmall;
+}
 string BMPlayer::getName()
 {
     return m_name;

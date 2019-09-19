@@ -66,14 +66,32 @@ void BMService::RankMatch(vector<BMPlayer>& players)
             }
             
         }
-        int rank = players[_RECYCLE_8_ - j -1].getRank();
-        if (rank != _RECYCLE_8_ - j -1)
-            players[_RECYCLE_8_ - j -1].setRank(_RECYCLE_8_ - j);
+
+        players[_RECYCLE_8_ - j -1].setRank(_RECYCLE_8_ - j);
+
     }
-    
-
-
+    setOptionBigOrSmall(players);
         
+}
+    
+void BMService::setOptionBigOrSmall(vector<BMPlayer>& players)
+{
+    unsigned int i = 0;
+    players[0].setBigorSmall("大分");
+    for (i = 0; i < _RECYCLE_8_ - 1; i++)
+    {
+        int winTimes1 = players[i].getWinTimes();
+        int winTimes2 = players[i+1].getWinTimes();
+        if (winTimes1 == winTimes2)
+        {
+            players[i].setBigorSmall("小分");
+            players[i+1].setBigorSmall("小分");
+        }
+        else
+        {
+            players[i+1].setBigorSmall("大分");
+        }
+    }
 }
     
 void BMService::handleMatchResult(BMMatch& match)
