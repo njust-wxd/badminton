@@ -29,8 +29,19 @@ public:
 
     string getGamesString();
     
+
+    
+    //获取所有4人比赛的人员对阵名单
+    void get_four_players_of_a_match_for_4();
+    
+    //获取所有5人比赛的人员对阵名单
+    void get_four_players_of_a_match_for_5();
+    
     //获取所有8人比赛的人员对阵名单
     void get_four_players_of_a_match_for_8();
+    
+    //获取所有9人比赛的人员对阵名单
+    void get_four_players_of_a_match_for_9();
     
     //得到一场比赛的分数
     //输入(int id_of_match)：比赛的ID号；

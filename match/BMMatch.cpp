@@ -95,6 +95,84 @@ string BMMatch::getGamesString()
     return BMCommon::genGamesString(m_games);
 }
     
+void BMMatch::get_four_players_of_a_match_for_4()
+{
+    //随机打乱人员名单
+    random_shuffle(m_players.begin(), m_players.end());
+        
+    BMGame game0;
+    game0.setIndex(1);
+    game0.addPlayerA(m_players[0]);
+    game0.addPlayerA(m_players[1]);
+    game0.addPlayerB(m_players[2]);
+    game0.addPlayerB(m_players[3]);
+    m_games.push_back(game0);
+        
+    BMGame game1;
+    game1.setIndex(2);
+    game1.addPlayerA(m_players[0]);
+    game1.addPlayerA(m_players[2]);
+    game1.addPlayerB(m_players[1]);
+    game1.addPlayerB(m_players[3]);
+    m_games.push_back(game1);
+        
+    BMGame game2;
+    game2.setIndex(3);
+    game2.addPlayerA(m_players[0]);
+    game2.addPlayerA(m_players[3]);
+    game2.addPlayerB(m_players[1]);
+    game2.addPlayerB(m_players[2]);
+    m_games.push_back(game2);
+        
+}
+    
+void BMMatch::get_four_players_of_a_match_for_5()
+{
+        //随机打乱人员名单
+    random_shuffle(m_players.begin(), m_players.end());
+    
+    BMGame game0;
+    game0.setIndex(1);
+    game0.addPlayerA(m_players[0]);
+    game0.addPlayerA(m_players[1]);
+    game0.addPlayerB(m_players[2]);
+    game0.addPlayerB(m_players[3]);
+    m_games.push_back(game0);
+        
+    BMGame game1;
+    game1.setIndex(2);
+    game1.addPlayerA(m_players[1]);
+    game1.addPlayerA(m_players[2]);
+    game1.addPlayerB(m_players[4]);
+    game1.addPlayerB(m_players[3]);
+    m_games.push_back(game1);
+    
+    BMGame game2;
+    game2.setIndex(3);
+    game2.addPlayerA(m_players[0]);
+    game2.addPlayerA(m_players[4]);
+    game2.addPlayerB(m_players[1]);
+    game2.addPlayerB(m_players[3]);
+    m_games.push_back(game2);
+        
+    BMGame game3;
+    game3.setIndex(4);
+    game3.addPlayerA(m_players[0]);
+    game3.addPlayerA(m_players[2]);
+    game3.addPlayerB(m_players[1]);
+    game3.addPlayerB(m_players[4]);
+    m_games.push_back(game3);
+        
+    BMGame game4;
+    game4.setIndex(5);
+    game4.addPlayerA(m_players[0]);
+    game4.addPlayerA(m_players[3]);
+    game4.addPlayerB(m_players[4]);
+    game4.addPlayerB(m_players[2]);
+    m_games.push_back(game4);
+    
+}
+    
 void BMMatch::get_four_players_of_a_match_for_8()
 {
     //随机打乱人员名单
@@ -213,7 +291,157 @@ void BMMatch::get_four_players_of_a_match_for_8()
     m_games.push_back(game13);
 }
 
-
+void BMMatch::get_four_players_of_a_match_for_9()
+{
+        //随机打乱人员名单
+    random_shuffle(m_players.begin(), m_players.end());
+        
+    BMGame game0;
+    game0.setIndex(1);
+    game0.addPlayerA(m_players[0]);
+    game0.addPlayerA(m_players[8]);
+    game0.addPlayerB(m_players[2]);
+    game0.addPlayerB(m_players[3]);
+    m_games.push_back(game0);
+        
+    BMGame game1;
+    game1.setIndex(2);
+    game1.addPlayerA(m_players[4]);
+    game1.addPlayerA(m_players[5]);
+    game1.addPlayerB(m_players[6]);
+    game1.addPlayerB(m_players[7]);
+    m_games.push_back(game1);
+        
+    BMGame game2;
+    game2.setIndex(3);
+    game2.addPlayerA(m_players[2]);
+    game2.addPlayerA(m_players[8]);
+    game2.addPlayerB(m_players[1]);
+    game2.addPlayerB(m_players[3]);
+    m_games.push_back(game2);
+        
+    BMGame game3;
+    game3.setIndex(4);
+    game3.addPlayerA(m_players[4]);
+    game3.addPlayerA(m_players[6]);
+    game3.addPlayerB(m_players[5]);
+    game3.addPlayerB(m_players[7]);
+    m_games.push_back(game3);
+        
+    BMGame game4;
+    game4.setIndex(5);
+    game4.addPlayerA(m_players[0]);
+    game4.addPlayerA(m_players[3]);
+    game4.addPlayerB(m_players[1]);
+    game4.addPlayerB(m_players[2]);
+    m_games.push_back(game4);
+    
+    BMGame game5;
+    game5.setIndex(6);
+    game5.addPlayerA(m_players[4]);
+    game5.addPlayerA(m_players[8]);
+    game5.addPlayerB(m_players[5]);
+    game5.addPlayerB(m_players[6]);
+    m_games.push_back(game5);
+        
+    BMGame game6;
+    game6.setIndex(7);
+    game6.addPlayerA(m_players[0]);
+    game6.addPlayerA(m_players[4]);
+    game6.addPlayerB(m_players[1]);
+    game6.addPlayerB(m_players[5]);
+    m_games.push_back(game6);
+    
+    BMGame game7;
+    game7.setIndex(8);
+    game7.addPlayerA(m_players[2]);
+    game7.addPlayerA(m_players[6]);
+    game7.addPlayerB(m_players[3]);
+    game7.addPlayerB(m_players[7]);
+    m_games.push_back(game7);
+    
+    BMGame game8;
+    game8.setIndex(9);
+    game8.addPlayerA(m_players[0]);
+    game8.addPlayerA(m_players[5]);
+    game8.addPlayerB(m_players[1]);
+    game8.addPlayerB(m_players[4]);
+    m_games.push_back(game8);
+    
+    BMGame game9;
+    game9.setIndex(10);
+    game9.addPlayerA(m_players[2]);
+    game9.addPlayerA(m_players[7]);
+    game9.addPlayerB(m_players[3]);
+    game9.addPlayerB(m_players[6]);
+    m_games.push_back(game9);
+    
+    BMGame game10;
+    game10.setIndex(11);
+    game10.addPlayerA(m_players[8]);
+    game10.addPlayerA(m_players[6]);
+    game10.addPlayerB(m_players[1]);
+    game10.addPlayerB(m_players[7]);
+    m_games.push_back(game10);
+    
+    BMGame game11;
+    game11.setIndex(12);
+    game11.addPlayerA(m_players[2]);
+    game11.addPlayerA(m_players[4]);
+    game11.addPlayerB(m_players[3]);
+    game11.addPlayerB(m_players[5]);
+    m_games.push_back(game11);
+    
+    BMGame game12;
+    game12.setIndex(13);
+    game12.addPlayerA(m_players[0]);
+    game12.addPlayerA(m_players[7]);
+    game12.addPlayerB(m_players[1]);
+    game12.addPlayerB(m_players[6]);
+    m_games.push_back(game12);
+    
+    BMGame game13;
+    game13.setIndex(14);
+    game13.addPlayerA(m_players[8]);
+    game13.addPlayerA(m_players[5]);
+    game13.addPlayerB(m_players[3]);
+    game13.addPlayerB(m_players[4]);
+    m_games.push_back(game13);
+    
+    BMGame game14;
+    game14.setIndex(15);
+    game14.addPlayerA(m_players[0]);
+    game14.addPlayerA(m_players[1]);
+    game14.addPlayerB(m_players[3]);
+    game14.addPlayerB(m_players[8]);
+    m_games.push_back(game14);
+    
+    BMGame game15;
+    game15.setIndex(16);
+    game15.addPlayerA(m_players[2]);
+    game15.addPlayerA(m_players[5]);
+    game15.addPlayerB(m_players[7]);
+    game15.addPlayerB(m_players[4]);
+    m_games.push_back(game15);
+    
+    BMGame game16;
+    game16.setIndex(17);
+    game16.addPlayerA(m_players[8]);
+    game16.addPlayerA(m_players[1]);
+    game16.addPlayerB(m_players[0]);
+    game16.addPlayerB(m_players[2]);
+    m_games.push_back(game16);
+    
+    BMGame game17;
+    game17.setIndex(18);
+    game17.addPlayerA(m_players[0]);
+    game17.addPlayerA(m_players[6]);
+    game17.addPlayerB(m_players[7]);
+    game17.addPlayerB(m_players[8]);
+    m_games.push_back(game17);
+}
+    
+    
 void BMMatch::send_scores_of_a_match(int id_of_match,
                                 int scores_of_first_pair_of_players,
                                 int scores_of_second_pair_of_players)
@@ -295,22 +523,36 @@ void BMMatch::get_match_results(vector<BMPlayer>& players, vector<BMGame> games)
 void BMMatch::startMatch_Recycle4()
 {
     BMSLOG_D("invoked");
+    
+    if (m_players.size() != _RECYCLE_4_)
+    {
+        BMSLOG_E("player num is not 4!");
+        return;
+    }
+    
+    get_four_players_of_a_match_for_4();
 }
 
 void BMMatch::startMatch_Recycle5()
 {
     BMSLOG_D("invoked");
+    
+    if (m_players.size() != _RECYCLE_5_)
+    {
+        BMSLOG_E("player num is not 5!");
+        return;
+    }
+    
+    get_four_players_of_a_match_for_5();
 }
 
 void BMMatch::startMatch_Recycle8()
 {
-    if (m_players.size() != 8)
+    if (m_players.size() != _RECYCLE_8_)
     {
         BMSLOG_E("player num is not 8!");
         return;
     }
-    //随机打乱人员名单
-    random_shuffle(m_players.begin(), m_players.end());
     
     get_four_players_of_a_match_for_8();
     
@@ -318,7 +560,13 @@ void BMMatch::startMatch_Recycle8()
 
 void BMMatch::startMatch_Recycle9()
 {
-    BMSLOG_D("invoked");
+    if (m_players.size() != _RECYCLE_8_)
+    {
+        BMSLOG_E("player num is not 8!");
+        return;
+    }
+    
+    get_four_players_of_a_match_for_9();
 }
 
 } // namespace badminton
