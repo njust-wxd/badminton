@@ -24,7 +24,7 @@ static struct lws_http_mount simple_mount = {
     /* .mount_next */		NULL,		/* linked-list "next" */
     /* .mountpoint */		"/",		/* mountpoint URL */
     /* .origin */			"./../html",  /* serve from dir */
-    /* .def */			    "index.html",	/* default filename */
+    /* .def */			    "main.html",	/* default filename */
     /* .protocol */			NULL,
     /* .cgienv */			NULL,
     /* .extra_mimetypes */	NULL,

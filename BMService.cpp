@@ -67,8 +67,22 @@ void BMService::RankMatch(vector<BMPlayer>& players)
             
         }
 
-        players[_RECYCLE_8_ - j -1].setRank(_RECYCLE_8_ - j);
-
+    }
+    for (i = 0; i < _RECYCLE_8_ - 1; i++)
+    {
+        int rank1 = players[i].getRank();
+        int rank2 = players[i+1].getRank();
+        int finalscore1 = players[i].getFinalScore();
+        int finalscore2 = players[i+1].getFinalScore();
+        if (rank1 == rank2)
+        {
+            if (finalscore1 == finalscore2)
+            {
+                continue;
+            }
+            else
+                players[i+1].setRank(i+2);
+        }
     }
     setOptionBigOrSmall(players);
         
