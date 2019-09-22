@@ -54,7 +54,17 @@ public:
     //输入(vector<string> list_of_players)：所有选手的名单；
     //输入(ONE_MATCH all_matches[_RECYCLE_8_NUM_OF_MATCH_])：所有的比赛名单和比赛分数；
     //输出(MATCH_RESULTS* match_result)：输出所有的比赛结果。
-    void get_match_results(vector<BMPlayer>& players, vector<BMGame> games);
+    void get_match_results(vector<BMPlayer>& players,
+                           vector<BMGame> games);
+    
+    void get_match_results_Recycle4(vector<BMPlayer>& players,
+                                    vector<BMGame> games);
+    void get_match_results_Recycle5(vector<BMPlayer>& players,
+                                    vector<BMGame> games);
+    void get_match_results_Recycle8(vector<BMPlayer>& players,
+                                    vector<BMGame> games);
+    void get_match_results_Recycle9(vector<BMPlayer>& players,
+                                    vector<BMGame> games);
 
 private:
     void startMatch_Recycle4();

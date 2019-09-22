@@ -450,15 +450,15 @@ void BMMatch::send_scores_of_a_match(int id_of_match,
     m_games[id_of_match].setScore(scores_of_first_pair_of_players, scores_of_second_pair_of_players);
 }
 
-void BMMatch::get_match_results(vector<BMPlayer>& players, vector<BMGame> games)
+void BMMatch::get_match_results_Recycle4(vector<BMPlayer>& players, vector<BMGame> games)
 {
     unsigned i;
-    for (i = 0; i < _RECYCLE_8_NUM_OF_MATCH_; i++)
+    for (i = 0; i < _RECYCLE_4_NUM_OF_MATCH_; i++)
     {
         SCORES_OF_ONE_MATCH scores = games[i].getScore();
         
         unsigned j = 0;
-        for (j = 0; j < _RECYCLE_8_; j++)
+        for (j = 0; j < _RECYCLE_4_; j++)
         {
             std::vector<BMPlayer> m_players_A = games[i].getPlayersA();
             std::vector<BMPlayer> m_players_B = games[i].getPlayersB();
@@ -504,6 +504,137 @@ void BMMatch::get_match_results(vector<BMPlayer>& players, vector<BMGame> games)
         }
     }
     
+    for (i = 0; i < _RECYCLE_4_; i++)
+    {
+        int wintimes_i = players[i].getWinTimes();
+        for (int k = 0; k < _RECYCLE_4_; k++)
+        {
+            int wintimes_k = players[k].getWinTimes();
+            if (wintimes_i < wintimes_k)
+            {
+                players[i].addOneRank();
+            }
+        }
+        players[i].addOneRank();
+    }
+}
+void BMMatch::get_match_results_Recycle5(vector<BMPlayer>& players, vector<BMGame> games)
+{
+    unsigned i;
+    for (i = 0; i < _RECYCLE_5_NUM_OF_MATCH_; i++)
+    {
+        SCORES_OF_ONE_MATCH scores = games[i].getScore();
+        unsigned j = 0;
+        for (j = 0; j < _RECYCLE_5_; j++)
+        {
+            std::vector<BMPlayer> m_players_A = games[i].getPlayersA();
+            std::vector<BMPlayer> m_players_B = games[i].getPlayersB();
+                
+            if (scores.scores_of_first_pair_of_players > scores.scores_of_second_pair_of_players)
+            {
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    
+                    players[j].addOneWinTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                
+            }
+            else
+            {
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneWinTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+            }
+        }
+    }
+        
+    for (i = 0; i < _RECYCLE_5_; i++)
+    {
+        int wintimes_i = players[i].getWinTimes();
+        for (int k = 0; k < _RECYCLE_5_; k++)
+        {
+            int wintimes_k = players[k].getWinTimes();
+            if (wintimes_i < wintimes_k)
+            {
+                players[i].addOneRank();
+            }
+        }
+        players[i].addOneRank();
+    }
+}
+    
+void BMMatch::get_match_results_Recycle8(vector<BMPlayer>& players, vector<BMGame> games)
+{
+    unsigned i;
+    for (i = 0; i < _RECYCLE_5_NUM_OF_MATCH_; i++)
+    {
+        SCORES_OF_ONE_MATCH scores = games[i].getScore();
+        unsigned j = 0;
+        for (j = 0; j < _RECYCLE_8_; j++)
+        {
+            std::vector<BMPlayer> m_players_A = games[i].getPlayersA();
+            std::vector<BMPlayer> m_players_B = games[i].getPlayersB();
+            
+            if (scores.scores_of_first_pair_of_players > scores.scores_of_second_pair_of_players)
+            {
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    
+                    players[j].addOneWinTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                
+            }
+            else
+            {
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneWinTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+            }
+        }
+    }
+        
     for (i = 0; i < _RECYCLE_8_; i++)
     {
         int wintimes_i = players[i].getWinTimes();
@@ -517,8 +648,94 @@ void BMMatch::get_match_results(vector<BMPlayer>& players, vector<BMGame> games)
         }
         players[i].addOneRank();
     }
+}
     
-         
+void BMMatch::get_match_results_Recycle9(vector<BMPlayer>& players, vector<BMGame> games)
+{
+    unsigned i;
+    for (i = 0; i < _RECYCLE_9_NUM_OF_MATCH_; i++)
+    {
+        SCORES_OF_ONE_MATCH scores = games[i].getScore();
+        unsigned j = 0;
+        for (j = 0; j < _RECYCLE_9_; j++)
+        {
+            std::vector<BMPlayer> m_players_A = games[i].getPlayersA();
+            std::vector<BMPlayer> m_players_B = games[i].getPlayersB();
+                
+            if (scores.scores_of_first_pair_of_players > scores.scores_of_second_pair_of_players)
+            {
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    
+                    players[j].addOneWinTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                    
+            }
+            else
+            {
+                if (m_players_B[0].getName() == players[j].getName()
+                    or m_players_B[1].getName() == players[j].getName())
+                {
+                    players[j].addOneWinTimes();
+                    int net_score = 0 - games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+                if (m_players_A[0].getName() == players[j].getName()
+                    or m_players_A[1].getName() == players[j].getName())
+                {
+                    players[j].addOneLoseTimes();
+                    int net_score = games[i].getNetScoreA();
+                    players[j].addFinalScore(net_score);
+                }
+            }
+        }
+    }
+        
+    for (i = 0; i < _RECYCLE_9_; i++)
+    {
+        int wintimes_i = players[i].getWinTimes();
+        for (int k = 0; k < _RECYCLE_9_; k++)
+        {
+            int wintimes_k = players[k].getWinTimes();
+            if (wintimes_i < wintimes_k)
+            {
+                players[i].addOneRank();
+            }
+        }
+        players[i].addOneRank();
+    }
+}
+    
+void BMMatch::get_match_results(vector<BMPlayer>& players, vector<BMGame> games)
+{
+
+    switch (m_type)
+    {
+        case 4:
+            get_match_results_Recycle4(players, games);
+            break;
+        case 5:
+            get_match_results_Recycle5(players, games);
+            break;
+        case 8:
+            get_match_results_Recycle8(players, games);
+            break;
+        case 9:
+            get_match_results_Recycle9(players, games);
+            break;
+        default:
+            break;
+    }
 }
 void BMMatch::startMatch_Recycle4()
 {
