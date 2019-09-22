@@ -777,7 +777,7 @@ void BMMatch::startMatch_Recycle8()
 
 void BMMatch::startMatch_Recycle9()
 {
-    if (m_players.size() != _RECYCLE_8_)
+    if (m_players.size() != _RECYCLE_9_)
     {
         BMSLOG_E("player num is not 8!");
         return;

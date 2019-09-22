@@ -35,7 +35,6 @@ void BMService::startMatch(int type, const std::vector<std::string>& players)
 {
     BMSLOG_I("invoked");
     BMMatch match;
-    match.setName("八人转");
     match.setType(type);
     match.initPlayers(players);
     match.startMatch();

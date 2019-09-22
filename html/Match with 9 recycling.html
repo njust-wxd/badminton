@@ -1,0 +1,346 @@
+<meta charset="UTF-8"> 
+<html>
+<head>
+<style>
+td {
+	text-align:left;
+	vertical-align:top
+}
+
+input {
+	width: 140px;
+  height: 35px;
+}
+
+button {
+	width: wordwrap;
+	height: 35px;
+}
+
+th {
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+.game-td {
+	text-align: center;
+	border: 1px solid black;
+	background-color: green;
+}
+
+.player-div {
+	margin-top: 10px;
+}
+
+.player-name {
+	color: white;
+}
+
+.player-score {
+	margin-top: 10px;
+}
+
+.score-input {
+	width: 60px;
+	height: 25px;
+	text-align: center;
+}
+
+.score-btn-div {
+	margin-top: 10px;
+}
+
+.score-btn {
+	height: 25px;
+	display: none;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+</head>
+</body>
+<body>
+	<div id="player-input">
+  <table cellspacing="10">
+    <tr>
+      <td>
+				<label>参与者1: </label>
+				<input type="text" id="player1"/>
+	  	</td>
+    	<td>
+				<label>参与者2: </label>
+				<input type="text" id="player2"/>
+    	</td>
+			<td>
+				<label>参与者3: </label>
+				<input type="text" id="player3"/>
+    	</td>
+    </tr>
+    <tr>
+			<td>
+				<label>参与者4: </label>
+				<input type="text" id="player4"/>
+    	</td>
+
+      <td>
+				<label>参与者5: </label>
+				<input type="text" id="player5"/>
+	  	</td>
+      <td>
+				<label>参与者6: </label>
+				<input type="text" id="player6"/>
+    	</td>
+    </tr>
+    <tr>
+        <td>
+				<label>参与者7: </label>
+				<input type="text" id="player7"/>
+    	</td>
+			<td>
+				<label>参与者8: </label>
+				<input type="text" id="player8"/>
+    	</td>
+            <td>
+                <label>参与者9: </label>
+                <input type="text" id="player9"/>
+            </td>
+    </tr>
+		<tr>
+			<td colspan="4" style="text-align: center">
+				<button id="btn_start_match" onclick="start_match()">开始比赛</button>
+				<button id="btn_restart_match" onclick="restart_match()">重新比赛</button>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+
+<script type="text/javascript">
+function gen_match_games() {
+	var table = "<div id='games_group'>"
+	+"<table cellspacing='10'>"
+	+	"<tr>"
+	+		"<td colspan='7' style='text-align: center'><b>比 赛 详 情</b></td>"
+	+	"</tr>";
+	for (var j = 0; j < 3; j++) {
+		table += "<tr>";
+		for (var i = 1; i <= 6; i++) {
+			var k = j * 6 + i;
+			table += 
+			"<td class='game-td'>"
+			+	"<div>第 " + k + " 场比赛</div>"
+			+	"<div class='player-div'>"
+			+   "<b id='player_a_game_" + k + "' class='player-name'></b>"
+			+   " VS "
+			+   "<b id='player_b_game_" + k + "' class='player-name'></b>"
+			+ "</div>"
+			+	"<div class='player-score'>"
+			+   "<input type='text' class='score-input' id='score_a_game_" + k + "'/>"
+			+   " : "
+			+   "<input type='text' class='score-input' id='score_b_game_" + k + "'/>"
+			+ "</div>"
+			+ "<div class='score-btn-div'>"
+			+	"<button class='score-btn' id='btn_confirm_score_" + k + "' onclick='confirm_score_" + k + "()'>确 定</button>"
+			+	"<button class='score-btn' id='btn_cancel_score_" + k + "' onclick='cancel_score_" + k + "()'>取 消</button>"
+			+ "</div>"
+			+ "</td>";
+		}
+		table += "</tr>";
+	}
+	table += 
+	  "<tr>"
+	+		"<td colspan='7'>"
+	+			"<button id='btn_rank' onclick='result_rank()'>排 名</button>"
+	+		"</td>"
+	+	"</tr>"
+	+ "</table>"
+	+"</div>";
+	$('#player-input').append(table);
+	$("#btn_start_match").attr("disabled", true);
+}
+
+function gen_rank_result(result) {
+	var table1 = "<div id='rank_result'>"
+	+ "<table cellspacing='10'>"
+	+   "<tr>"
+	+     "<td colspan='5'><b>比 赛 排 名</b></td>"
+	+   "</tr>"
+	+   "<tr>"
+	+     "<th>名次</th>"
+	+     "<th>姓名</th>"
+	+     "<th>胜场</th>"
+	+     "<th>输场</th>"
+	+     "<th>净胜分</th>"
+	+   "</tr>";
+	for (var i = 0; i < 9; i++) {
+		table1 += 
+		"<tr>"
+		+  "<td>" + JSON.stringify(result[i].rank) + "</td>"
+		+  "<td>" + JSON.stringify(result[i].name) + "</td>"
+		+  "<td>" + JSON.stringify(result[i].win_times) + "</td>"
+		+  "<td>" + JSON.stringify(result[i].lose_times) + "</td>"
+		+  "<td>" + JSON.stringify(result[i].net_score) + "</td>"
+		+"</tr>";
+	}
+	table1 += 
+	  "</table>"
+	+ "</div>";
+	$("#games_group").append(table1);
+	$("#btn_rank").attr("disabled", true);
+}
+</script>
+
+<script type="text/javascript">
+function get_appropriate_ws_url(extra_url) {
+	var pcol;
+	var u = document.URL;
+	/*
+	 * We open the websocket encrypted if this page came on an
+	 * https:// url itself, otherwise unencrypted
+	 */
+	if (u.substring(0, 5) == "https") {
+		pcol = "wss://";
+		u = u.substr(8);
+	} else {
+		pcol = "ws://";
+		if (u.substring(0, 4) == "http")
+			u = u.substr(7);
+	}
+
+	u = u.split('/');
+	/* + "/xxx" bit is for IE10 workaround */
+	return pcol + u[0] + "/" + extra_url;
+}
+
+function new_ws(urlpath, protocol) {
+	if (typeof MozWebSocket != "undefined")
+		return new MozWebSocket(urlpath, protocol);
+
+	return new WebSocket(urlpath, protocol);
+}
+
+ws = new_ws(get_appropriate_ws_url(""), "badminton-service");
+try {
+	ws.onopen = function() {
+		document.getElementById("btn_start_match").disabled = 0;
+		document.getElementById("btn_restart_match").disabled = 0;
+	} 
+
+	ws.onmessage = function got_packet(msg) {
+		var obj = JSON.parse(msg.data);
+		if (obj.type == "WS_GROUP_RESULT") {
+		} else if (obj.type == "WS_MATCH_GAMES") {
+			display_game_group(obj.games);
+		} else if (obj.type == "WS_RANK_RESULT") {
+			display_rank_result(obj.players_result);
+		} 
+	} 
+
+	ws.onclose = function() {
+		document.getElementById("btn_start_match").disabled = 1;
+		document.getElementById("btn_restart_match").disabled = 1;
+	}
+} catch(exception) {
+	alert('<p>Error' + exception);  
+}
+
+function start_match() {
+	var root = {};
+	var jplayers = [];
+	for (var i = 1; i <=9; i++) {
+		var player_id = "player" + i;
+		var player = $("#"+player_id).val();
+		if (player == null || player == "") {
+			alert("参与者 "+i+" 没有输入！");
+			return;
+		}
+		jplayers.push(player);
+	}
+	root["cmd"] = "CMD_START_MATCH_9";
+	root["players"] = jplayers;
+	ws.send(JSON.stringify(root));
+}
+
+function result_rank() {
+  var root = {};
+	root["cmd"] = "CMD_MATCH_RESULT_9";
+	var jplayers = [];
+	for (var i = 1; i <=9; i++) {
+		var player_id = "player" + i;
+		var player = $("#"+player_id).val();
+		jplayers.push(player);
+	}
+	root["players"] = jplayers;
+	var games_result = [];
+	for (var i = 1; i <=18; i++) {
+		var game_result = {};
+		var players_a_id = "player_a_game_" + i;
+		var players_b_id = "player_b_game_" + i;
+		var score_a_id = "score_a_game_" + i;
+		var score_b_id = "score_b_game_" + i;
+
+		var players_a = $("#"+players_a_id).text().split('/');
+		var score_a = $("#"+score_a_id).val();
+		game_result["player_a1"] = players_a[0];
+		game_result["player_a2"] = players_a[1];
+		game_result["score_a"] = Number(score_a);
+
+		var players_b = $("#"+players_b_id).text().split('/');
+		var score_b = $("#"+score_b_id).val();
+		game_result["player_b1"] = players_b[0];
+		game_result["player_b2"] = players_b[1];
+		game_result["score_b"] = Number(score_b);
+		
+		var net_score_a = Number(score_a) - Number(score_b);
+		var net_score_b = Number(score_b) - Number(score_a);
+		game_result["net_score_a"] = Number(net_score_a);
+		game_result["net_score_b"] = Number(net_score_b);
+
+		games_result.push(game_result);
+	}
+	root["result"] = games_result;
+	ws.send(JSON.stringify(root));
+}
+
+function restart_match() {
+	$("#btn_start_match").attr("disabled", false);
+	$("#games_group").remove();
+	$("#rank_result").remove();
+	for (var i = 1; i <=9; i++) {
+		var player_id = "player" + i;
+		$("#"+player_id).val("");
+	}
+}
+
+window.onbeforeunload= function() {
+	ws.close();
+	return confirm("确定离开此页面吗？");
+}
+
+window.onunload = function() {
+	ws.close();
+	return confirm("确定离开此页面吗？");
+}
+
+function display_rank_result(result) {
+	gen_rank_result(result);
+}
+
+function display_game_group(games) {
+	gen_match_games();
+	for (var i = 0; i < 18; i++) {
+		var players_a_id = "player_a_game_" + (i+1);
+		var players_b_id = "player_b_game_" + (i+1);
+		$("#"+players_a_id).text(games[i].players_a);
+		$("#"+players_b_id).text(games[i].players_b);
+	}
+	gen_rank_result();
+}
+
+</script>
+
+</html>

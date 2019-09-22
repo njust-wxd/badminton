@@ -18,10 +18,14 @@ using std::string;
 namespace badminton {
     
 const static std::string CMD_START_MATCH_4 = "CMD_START_MATCH_4";
+const static std::string CMD_START_MATCH_5 = "CMD_START_MATCH_5";
+const static std::string CMD_START_MATCH_9 = "CMD_START_MATCH_9";
 const static std::string CMD_START_MATCH = "CMD_START_MATCH";
 const static std::string CMD_MATCH_RESULT = "CMD_MATCH_RESULT";
 const static std::string CMD_MATCH_RESULT_4 = "CMD_MATCH_RESULT_4";
-
+const static std::string CMD_MATCH_RESULT_5 = "CMD_MATCH_RESULT_5";
+const static std::string CMD_MATCH_RESULT_9 = "CMD_MATCH_RESULT_9";
+    
 BMWSService* BMWSService::s_pInstance = nullptr;
 static struct lws_http_mount simple_mount = {
     /* .mount_next */		NULL,		/* linked-list "next" */
@@ -232,6 +236,26 @@ void BMWSService::handleMessage(char* payload, size_t len)
         }
         m_pService->startMatch(_RECYCLE_4_, players);
     }
+    else if (CMD_START_MATCH_5 == cmd)
+    {
+        BMSLOG_I("CMD_START_MATCH_5");
+        std::vector<std::string> players;
+        for (auto jplayer : root["players"])
+        {
+            players.push_back(jplayer.asString());
+        }
+        m_pService->startMatch(_RECYCLE_5_, players);
+    }
+    else if (CMD_START_MATCH_9 == cmd)
+    {
+        BMSLOG_I("CMD_START_MATCH_9");
+        std::vector<std::string> players;
+        for (auto jplayer : root["players"])
+        {
+            players.push_back(jplayer.asString());
+        }
+        m_pService->startMatch(_RECYCLE_9_, players);
+    }
     else if (CMD_MATCH_RESULT == cmd)
     {
         BMSLOG_I("CMD_MATCH_RESULT");
@@ -274,6 +298,78 @@ void BMWSService::handleMessage(char* payload, size_t len)
         BMMatch match;
         match.setName("四人转");
         match.setType(_RECYCLE_4_);
+        
+        vector<BMPlayer> players;
+        for (auto jplayer : root["players"])
+        {
+            BMPlayer player;
+            player.setName(jplayer.asString());
+            players.push_back(player);
+        }
+        match.setPlayers(players);
+        vector<BMGame> games;
+        for (auto jresult : root["result"])
+        {
+            BMGame game;
+            BMPlayer player_a1, player_a2, player_b1, player_b2;
+            player_a1.setName(jresult["player_a1"].asString());
+            player_a2.setName(jresult["player_a2"].asString());
+            player_b1.setName(jresult["player_b1"].asString());
+            player_b2.setName(jresult["player_b2"].asString());
+            game.addPlayerA(player_a1);
+            game.addPlayerA(player_a2);
+            game.addPlayerB(player_b1);
+            game.addPlayerB(player_b2);
+            int score_a = jresult["score_a"].asInt();
+            int score_b = jresult["score_b"].asInt();
+            game.setScore(score_a, score_b);
+            games.push_back(game);
+        }
+        match.setGames(games);
+        m_pService->handleMatchResult(match);
+    }
+    else if (CMD_MATCH_RESULT_5 == cmd)
+    {
+        BMSLOG_I("CMD_MATCH_RESULT_5");
+        BMMatch match;
+        match.setName("五人转");
+        match.setType(_RECYCLE_5_);
+        
+        vector<BMPlayer> players;
+        for (auto jplayer : root["players"])
+        {
+            BMPlayer player;
+            player.setName(jplayer.asString());
+            players.push_back(player);
+        }
+        match.setPlayers(players);
+        vector<BMGame> games;
+        for (auto jresult : root["result"])
+        {
+            BMGame game;
+            BMPlayer player_a1, player_a2, player_b1, player_b2;
+            player_a1.setName(jresult["player_a1"].asString());
+            player_a2.setName(jresult["player_a2"].asString());
+            player_b1.setName(jresult["player_b1"].asString());
+            player_b2.setName(jresult["player_b2"].asString());
+            game.addPlayerA(player_a1);
+            game.addPlayerA(player_a2);
+            game.addPlayerB(player_b1);
+            game.addPlayerB(player_b2);
+            int score_a = jresult["score_a"].asInt();
+            int score_b = jresult["score_b"].asInt();
+            game.setScore(score_a, score_b);
+            games.push_back(game);
+        }
+        match.setGames(games);
+        m_pService->handleMatchResult(match);
+    }
+    else if (CMD_MATCH_RESULT_9 == cmd)
+    {
+        BMSLOG_I("CMD_MATCH_RESULT_9");
+        BMMatch match;
+        match.setName("九人转");
+        match.setType(_RECYCLE_9_);
         
         vector<BMPlayer> players;
         for (auto jplayer : root["players"])
