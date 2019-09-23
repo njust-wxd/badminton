@@ -44,72 +44,9 @@ void BMService::startMatch(int type, const std::vector<std::string>& players)
 }
 
     
-void BMService::rankMatch(vector<BMPlayer>& players, int type)
-{
-    unsigned int i = 0, j = 0;
-    for (j = 0; j < type; j++)
-    {
-        for (i = 0; i < type - 1; i++)
-        {
-            int rank1 = players[i].getRank();
-            int rank2 = players[i+1].getRank();
-            if (rank1 > rank2)
-                std::swap(players[i], players[i+1]);
-            if (rank1 == rank2)
-            {
-                int finalscore1 = players[i].getFinalScore();
-                int finalscore2 = players[i+1].getFinalScore();
-                if (finalscore1 < finalscore2)
-                {
-                    std::swap(players[i], players[i+1]);
-                }
-            }
-            
-        }
 
-    }
     
-    for (i = 0; i < type - 1; i++)
-    {
-        int wintimes1 = players[i].getWinTimes();
-        int wintimes2 = players[i+1].getWinTimes();
-        int finalscore1 = players[i].getFinalScore();
-        int finalscore2 = players[i+1].getFinalScore();
-        if (wintimes1 == wintimes2)
-        {
-            if (finalscore1 == finalscore2)
-            {
-                continue;
-            }
-            else
-            {
-                players[i+1].setRank(i+2);
-                BMSLOG_I("%d\n", i);
-            }
-        }
-    }
-    
-}
-    
-void BMService::setOptionBigOrSmall(vector<BMPlayer>& players, int type)
-{
-    unsigned int i = 0;
-    players[0].setBigorSmall("大分");
-    for (i = 0; i < type - 1; i++)
-    {
-        int winTimes1 = players[i].getWinTimes();
-        int winTimes2 = players[i+1].getWinTimes();
-        if (winTimes1 == winTimes2)
-        {
-            players[i].setBigorSmall("小分");
-            players[i+1].setBigorSmall("小分");
-        }
-        else
-        {
-            players[i+1].setBigorSmall("大分");
-        }
-    }
-}
+
     
 void BMService::handleMatchResult(BMMatch& match)
 {
@@ -121,8 +58,8 @@ void BMService::handleMatchResult(BMMatch& match)
     match.get_match_results(players, games);
     int type = match.getType();
     BMSLOG_I("%d\n", type);
-    rankMatch(players,type);
-//    setOptionBigOrSmall(players, type);
+    match.rankMatch(players,type);
+    match.setOptionBigOrSmall(players, type);
  
     string result = BMCommon::genRankResult(players);
     BMWSService::getInstance()->sendMessage(result);

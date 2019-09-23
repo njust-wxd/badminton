@@ -785,5 +785,71 @@ void BMMatch::startMatch_Recycle9()
     
     get_four_players_of_a_match_for_9();
 }
+void BMMatch::rankMatch(vector<BMPlayer>& players, int type)
+{
+    unsigned int i = 0, j = 0;
+    for (j = 0; j < type; j++)
+    {
+        for (i = 0; i < type - 1; i++)
+        {
+            int rank1 = players[i].getRank();
+            int rank2 = players[i+1].getRank();
+            if (rank1 > rank2)
+            std::swap(players[i], players[i+1]);
+            if (rank1 == rank2)
+            {
+                int finalscore1 = players[i].getFinalScore();
+                int finalscore2 = players[i+1].getFinalScore();
+                if (finalscore1 < finalscore2)
+                {
+                    std::swap(players[i], players[i+1]);
+                }
+            }
+                
+        }
+            
+    }
+        
+    for (i = 0; i < type - 1; i++)
+    {
+        int wintimes1 = players[i].getWinTimes();
+        int wintimes2 = players[i+1].getWinTimes();
+        int finalscore1 = players[i].getFinalScore();
+        int finalscore2 = players[i+1].getFinalScore();
+        if (wintimes1 == wintimes2)
+        {
+            if (finalscore1 == finalscore2)
+            {
+                int rank1 = players[i].getRank();
+                players[i+1].setRank(rank1);
+            }
+            else
+            {
+                players[i+1].setRank(i+2);
+                BMSLOG_I("%d\n", i);
+            }
+        }
+    }
+    
+}
+void BMMatch::setOptionBigOrSmall(vector<BMPlayer>& players, int type)
+{
+    unsigned int i = 0;
+    players[0].setBigorSmall("大分");
+    for (i = 0; i < type - 1; i++)
+    {
+        int winTimes1 = players[i].getWinTimes();
+        int winTimes2 = players[i+1].getWinTimes();
+        if (winTimes1 == winTimes2)
+        {
+            players[i].setBigorSmall("小分");
+            players[i+1].setBigorSmall("小分");
+        }
+        else
+        {
+            players[i+1].setBigorSmall("大分");
+        }
+    }
+}
 
 } // namespace badminton

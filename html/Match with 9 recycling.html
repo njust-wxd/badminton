@@ -111,6 +111,7 @@ td {
 			<td colspan="4" style="text-align: center">
 				<button id="btn_start_match" onclick="start_match()">开始比赛</button>
 				<button id="btn_restart_match" onclick="restart_match()">重新比赛</button>
+                <button id="btn_return" onclick="return_main()">返回</button>
 			</td>
 		</tr>
 	</table>
@@ -316,15 +317,6 @@ function restart_match() {
 	}
 }
 
-window.onbeforeunload= function() {
-	ws.close();
-	return confirm("确定离开此页面吗？");
-}
-
-window.onunload = function() {
-	ws.close();
-	return confirm("确定离开此页面吗？");
-}
 
 function display_rank_result(result) {
 	gen_rank_result(result);
@@ -340,7 +332,14 @@ function display_game_group(games) {
 	}
 	gen_rank_result();
 }
-
+function return_main()
+{
+    var url = 'main.html';
+    window.close();
+    window.open(url); //新窗口打开
+    window.location.href = url; //当前窗口打开
+    
+}
 </script>
 
 </html>

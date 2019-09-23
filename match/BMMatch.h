@@ -29,6 +29,9 @@ public:
 
     string getGamesString();
     
+    void setOptionBigOrSmall(vector<BMPlayer>& players, int type);
+    void rankMatch(vector<BMPlayer>& players, int type);
+    
 
     
     //获取所有4人比赛的人员对阵名单

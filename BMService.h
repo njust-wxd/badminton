@@ -20,8 +20,7 @@ public:
 
     void handleMatchResult(BMMatch& match);
     
-    void setOptionBigOrSmall(vector<BMPlayer>& players, int type);
-    void rankMatch(vector<BMPlayer>& players, int type);
+
     
     
 
